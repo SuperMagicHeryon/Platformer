@@ -1,6 +1,7 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
+#include "stl_includes.hpp"
 #include "sfml_includes.hpp"
 #include "resources_manager.hpp"
 
@@ -17,6 +18,7 @@ class Button
 
       void setTextScale(float, float);
       void setTextPosition(float, float);
+      void setTextString(const std::string&);
 
       bool contains(int, int);
 

@@ -20,9 +20,20 @@ class OptionsMenuGameState : public GameState
 
       void changeLanguage(int);
       void changeWindowMode(int);
+      void changeKey(std::string&, const sf::Event&);
+
+      void setControlsButtonsTexts();
+
+      std::fstream config_file;
 
       std::string language;
       std::string window_mode;
+
+      std::vector<std::string> keys;
+
+      bool move_left_key_button_focus;
+      bool move_right_key_button_focus;
+      bool jump_key_button_focus;
 
       std::vector<Button*> buttons;
       std::vector<sf::Text*> options;

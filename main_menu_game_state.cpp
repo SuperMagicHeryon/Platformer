@@ -7,13 +7,23 @@ MainMenuGameState::MainMenuGameState(Game* _game, sf::RenderWindow& _window, Res
 {
    loadData();
 
-   resources_manager.setTextureSmooth("background.jpg", true);
-   background_sprite.setTexture(resources_manager.requestTexture("background.jpg"));
+   resources_manager.setTextureSmooth("background.png", true);
+   background_sprite.setTexture(resources_manager.requestTexture("background.png"));
 
    //Initializing buttons
-   buttons.push_back(new Button("Play", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
-   buttons.push_back(new Button("Options", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
-   buttons.push_back(new Button("Exit", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   if(game->getLanguage() == "english")
+   {
+      buttons.push_back(new Button("Play", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Options", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Exit", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   }
+
+   else if(game->getLanguage() == "french")
+   {
+      buttons.push_back(new Button("Jouer", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Options", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Quitter", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   }
 
    resize();
 
@@ -33,7 +43,7 @@ MainMenuGameState::~MainMenuGameState()
 
 void MainMenuGameState::loadData()
 {
-   if(!(resources_manager.canLoadTexture("background.jpg") &&
+   if(!(resources_manager.canLoadTexture("background.png") &&
         resources_manager.canLoadTexture("button.png") &&
         resources_manager.canLoadFont("Ubuntu-C.ttf")))
    {

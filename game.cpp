@@ -80,7 +80,7 @@ void Game::setWindowMode(const std::string& _window_mode)
 
 void Game::loadData()
 {
-   config_file.open("data/platformer.config", std::fstream::in);
+   config_file.open("data/config/platformer.config", std::fstream::in);
 
    if(!config_file)
    {
@@ -102,7 +102,7 @@ void Game::loadData()
 
 void Game::writeData()
 {
-   config_file.open("data/platformer.config", std::fstream::out);
+   config_file.open("data/config/platformer.config", std::fstream::out);
 
    if(!config_file)
    {

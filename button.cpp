@@ -49,6 +49,13 @@ void Button::setTextPosition(float _x, float _y)
    return;
 }
 
+void Button::setTextString(const std::string& _text)
+{
+   button_text.setString(_text);
+
+   return;
+}
+
 bool Button::contains(int _x, int _y)
 {
    return button_sprite.getGlobalBounds().contains(_x, _y);

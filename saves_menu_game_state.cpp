@@ -8,15 +8,27 @@ SavesMenuGameState::SavesMenuGameState(Game* _game, sf::RenderWindow& _window, R
    loadData();
 
    //Initializing background
-   resources_manager.setTextureSmooth("background.jpg", true);
-   background_sprite.setTexture(resources_manager.requestTexture("background.jpg"));
+   resources_manager.setTextureSmooth("background.png", true);
+   background_sprite.setTexture(resources_manager.requestTexture("background.png"));
 
    //Initializing buttons
-   buttons.push_back(new Button("Save 1", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
-   buttons.push_back(new Button("Save 2", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
-   buttons.push_back(new Button("Save 3", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   if(game->getLanguage() == "english")
+   {
+      buttons.push_back(new Button("Save 1", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Save 2", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Save 3", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
 
-   buttons.push_back(new Button("Back", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Back", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   }
+
+   else if(game->getLanguage() == "french")
+   {
+      buttons.push_back(new Button("Fichier 1", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Fichier 2", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+      buttons.push_back(new Button("Fichier 3", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+
+      buttons.push_back(new Button("Retour", resources_manager.requestTexture("button.png"), resources_manager.requestFont("Ubuntu-C.ttf"), 70));
+   }
 
    resize();
 
@@ -36,7 +48,7 @@ SavesMenuGameState::~SavesMenuGameState()
 
 void SavesMenuGameState::loadData()
 {
-   if(!(resources_manager.canLoadTexture("background.jpg") &&
+   if(!(resources_manager.canLoadTexture("background.png") &&
         resources_manager.canLoadTexture("button.png") &&
         resources_manager.canLoadFont("Ubuntu-C.ttf")))
    {
@@ -118,6 +130,13 @@ void SavesMenuGameState::run()
         	 game->changeGameState(new MainMenuGameState(game, window, resources_manager));
         	 return;
          }
+      }
+
+      if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+      {
+         resources_manager.clearResources();
+         game->changeGameState(new MainMenuGameState(game, window, resources_manager));
+         return;
       }
 
       if(event.type == sf::Event::Resized)

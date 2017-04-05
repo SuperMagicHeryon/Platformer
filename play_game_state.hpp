@@ -8,6 +8,7 @@ class PlayGameState : public GameState
 {
    public:
       PlayGameState(Game*, sf::RenderWindow&, ResourcesManager&);
+      ~PlayGameState();
 
       virtual void resize();
       virtual void draw() const;
@@ -16,7 +17,10 @@ class PlayGameState : public GameState
    private:
       virtual void loadData();
 
-      Level level;
+      Level* level;
+
+      std::fstream config_file;
+      std::vector<sf::Keyboard::Key> keys;
 };
 
 #endif //PLAY_GAME_STATE_HPP
